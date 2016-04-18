@@ -2,23 +2,28 @@
 /**
  * Created by PhpStorm.
  * User: christian
- * Date: 18/03/16
- * Time: 17:39
+ * Date: 18/04/16
+ * Time: 06:40
  */
 
 namespace Veloci\Core\Helper\Resultset;
 
 
 use Closure;
-use MongoDB\Driver\Cursor;
 use Veloci\Core\Helper\Resultset\Filter\ResultsetFilter;
 
-class MongodbResultset implements Resultset
+class RepositoryResultset implements Resultset
 {
+
     /**
-     * @var Cursor
+     * @var \Iterator
      */
     private $cursor;
+
+    /**
+     * @var Closure
+     */
+    private $hydrator;
 
     /**
      * @var ResultsetFilter[]
@@ -26,26 +31,15 @@ class MongodbResultset implements Resultset
      */
     private $filters;
 
-    /**
-     * @var Closure
-     */
-    private $hydrator;
-
-    public function __construct(Cursor $cursor, Closure $hydrator = null)
+    public function __construct(\Iterator $cursor, Closure $hydrator = null)
     {
-        $this->cursor = new \IteratorIterator($cursor);
-        $this->cursor->rewind();
-        $this->filters = [];
-
+        $this->cursor   = $cursor;
         $this->hydrator = $hydrator;
+        $this->filters  = [];
+
+        $this->cursor->rewind();
     }
 
-    /**
-     * Return the current element
-     * @link http://php.net/manual/en/iterator.current.php
-     * @return mixed Can return any type.
-     * @since 5.0.0
-     */
     public function current()
     {
         $current = $this->cursor->current();
@@ -67,9 +61,7 @@ class MongodbResultset implements Resultset
      */
     public function next()
     {
-        if ($this->cursor->valid()) {
-            $this->cursor->next();
-        }
+        // TODO: Implement next() method.
     }
 
     /**
@@ -80,7 +72,7 @@ class MongodbResultset implements Resultset
      */
     public function key()
     {
-        return $this->cursor->key();
+        // TODO: Implement key() method.
     }
 
     /**
@@ -92,7 +84,7 @@ class MongodbResultset implements Resultset
      */
     public function valid()
     {
-        return $this->cursor->valid();
+        // TODO: Implement valid() method.
     }
 
     /**
@@ -103,12 +95,31 @@ class MongodbResultset implements Resultset
      */
     public function rewind()
     {
-        $this->cursor->rewind();
+        // TODO: Implement rewind() method.
     }
 
+    /**
+     * @param ResultsetFilter $filter
+     */
     public function appendFilter(ResultsetFilter $filter)
     {
-        $this->filters [] = $filter;
+        // TODO: Implement appendFilter() method.
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray():array
+    {
+        // TODO: Implement toArray() method.
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNextElement()
+    {
+        // TODO: Implement getNextElement() method.
     }
 
     protected function applyFilters(array $input):array
@@ -118,26 +129,5 @@ class MongodbResultset implements Resultset
         }
 
         return $input;
-    }
-
-    public function toArray():array
-    {
-        $this->rewind();
-        $result = [];
-
-        foreach ($this as $key => $value) {
-            $result[$key] = (array)$value;
-        }
-
-        return $result;
-    }
-
-    public function getNextElement()
-    {
-        $value = $this->current();
-
-        $this->next();
-
-        return $value;
     }
 }

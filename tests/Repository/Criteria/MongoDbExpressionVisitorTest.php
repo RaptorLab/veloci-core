@@ -22,11 +22,11 @@ class MongoDbExpressionVisitorTest extends \PHPUnit_Framework_TestCase
 
         $criteria = Criteria::create();
 
-        $criteria->where(new Comparison('pippo', '=', 42));
+        $criteria->where(new Comparison('answer', '=', 42));
 
         $result = $criteria->getWhereExpression()->visit($visitor);
 
-        $expectedResult = ['pippo' => ['$eq' => 42]];
+        $expectedResult = ['answer' => ['$eq' => 42]];
 
         \PHPUnit_Framework_Assert::assertEquals($expectedResult, $result);
     }
@@ -40,11 +40,12 @@ class MongoDbExpressionVisitorTest extends \PHPUnit_Framework_TestCase
         $expr = Criteria::expr();
 
         $composite = new CompositeExpression(CompositeExpression::TYPE_OR, [
-            $expr->eq('pippo', 42),
+            $expr->eq('answer', 42),
             $expr->gte('age', 18),
             new CompositeExpression(CompositeExpression::TYPE_OR, [
-                $expr->in('pluto', [1, 2, 3]),
-                $expr->neq('paperino', 'sfigato')
+                $expr->in('something', [1, 2, 3]),
+                $expr->neq('Donald', 'mouse'),
+                $expr->notIn('dunno', [5, 7])
             ])
         ]);
 
@@ -54,15 +55,16 @@ class MongoDbExpressionVisitorTest extends \PHPUnit_Framework_TestCase
 
         $expectedResult = [
             '$or' => [
-                'pippo' => [
+                'answer' => [
                     '$eq' => 42
                 ],
                 'age'   => [
                     '$gte' => 18
                 ],
                 '$or'   => [
-                    'pluto'    => ['$in' => [1, 2, 3]],
-                    'paperino' => ['$ne' => 'sfigato']
+                    'something'    => ['$in' => [1, 2, 3]],
+                    'Donald' => ['$ne' => 'mouse'],
+                    'dunno' => ['$nin' => [5, 7]]
                 ]
             ]
         ];
