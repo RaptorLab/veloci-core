@@ -29,10 +29,10 @@ class RequiredRule implements ValidationRule
     }
 
     /**
-     * @param $field
+     * @param string $field
      * @return string
      */
-    public function getMessage($field):string
+    public function getMessage(string $field):string
     {
         return sprintf('The field %s is required', $field);
     }

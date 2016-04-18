@@ -16,5 +16,5 @@ interface ValidationRule
 
     public function getType ():string;
 
-    public function getMessage($field):string;
+    public function getMessage(string $field):string;
 }

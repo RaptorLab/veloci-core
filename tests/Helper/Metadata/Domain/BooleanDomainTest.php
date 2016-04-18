@@ -16,19 +16,26 @@ class BooleanDomainTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     *
+     * @test
      * @dataProvider provider
      * @param $value
      *
      * @param bool $expectedResult
      */
-    public function testValidation($value, bool $expectedResult)
+    public function shouldValidate($value, bool $expectedResult)
     {
         $domain = new BooleanDomain();
 
         $result = $domain->validate($value);
 
         \PHPUnit_Framework_Assert::assertEquals($expectedResult, $result);
+    }
+
+    public function shouldReturnType()
+    {
+        $domain = new BooleanDomain();
+
+        \PHPUnit_Framework_Assert::assertEquals('bool', $domain->getType());
     }
 
     public function provider()

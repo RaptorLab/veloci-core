@@ -12,12 +12,12 @@ namespace Veloci\Core\Helper\Metadata\Domain;
 class IntegerDomain extends AbstractDomain
 {
     /**
-     * @var null
+     * @var null|int
      */
     private $min;
 
     /**
-     * @var null
+     * @var null|int
      */
     private $max;
 
@@ -43,14 +43,18 @@ class IntegerDomain extends AbstractDomain
 
     public static function create(string $init = null):Domain
     {
-        if ($init !== null) {
-            $init = trim($init);
+        if (!empty($init)) {
+            $result = explode(',', trim($init));
 
-            $result = preg_match('/^(\d+)?[\s]*,[\s]*(\d+)?$/', $init, $matches);
+            if (count($result) === 2) {
+                $min = empty($result[0]) ? null : (int)$result[0];
+                $max = empty($result[1]) ? null : (int)$result[1];
 
-            if ($result === 1) {
-                $min = self::getValue($matches, 1, null);
-                $max = self::getValue($matches, 2, null);
+                if ($min > $max && $min !== null && $max !== null) {
+                    $tmp = $max;
+                    $max = $min;
+                    $min = $tmp;
+                }
 
                 return new static ($min, $max);
             }
@@ -59,10 +63,19 @@ class IntegerDomain extends AbstractDomain
         return parent::create($init);
     }
 
-    private static function getValue(array &$array, $index, $default = null)
+    /**
+     * @return null|int
+     */
+    public function getMin()
     {
-        return array_key_exists($index, $array) && ($array[$index] !== null)
-            ? $array[$index]
-            : $default;
+        return $this->min;
+    }
+
+    /**
+     * @return null|int
+     */
+    public function getMax()
+    {
+        return $this->max;
     }
 }
