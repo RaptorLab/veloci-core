@@ -47,16 +47,16 @@ abstract class ContainerAwareModelFactory implements ModelFactory
      */
     final public function create(array $data = [], bool $fullHydration = false):EntityModel
     {
-        $this->preCreate($data);
+        $this->afterCreate($data);
 
         $model = $this->hydrator->hydrate($this->className, $data, $fullHydration);
 
-        $this->postCreate($model);
+        $this->beforeCreate($model);
 
         return $model;
     }
 
-    abstract protected function preCreate(array &$data);
+    abstract protected function afterCreate(array &$data);
 
-    abstract protected  function postCreate(Model &$model);
+    abstract protected  function beforeCreate(Model &$model);
 }
