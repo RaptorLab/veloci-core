@@ -26,6 +26,7 @@ abstract class ContainerAwareModelFactory implements ModelFactory
 
     /**
      * ContainerAwareFactory constructor.
+     *
      * @param DependencyInjectionContainer $container
      * @param ModelHydrator $hydrator
      * @param string $className
@@ -58,5 +59,5 @@ abstract class ContainerAwareModelFactory implements ModelFactory
 
     abstract protected function afterCreate(array &$data);
 
-    abstract protected  function beforeCreate(Model &$model);
+    abstract protected function beforeCreate(Model &$model);
 }

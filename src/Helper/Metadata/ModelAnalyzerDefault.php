@@ -27,6 +27,7 @@ final class ModelAnalyzerDefault implements ModelAnalyzer
 
     /**
      * @param string $object
+     *
      * @return ObjectMetadata
      *
      * @throws  \InvalidArgumentException
@@ -61,7 +62,11 @@ final class ModelAnalyzerDefault implements ModelAnalyzer
         return $objectMetadata;
     }
 
-    private function analyzeProperty(string $propertyName, ReflectionMethod $method, ObjectMetadata $objectMetadata):PropertyMetadata
+    private function analyzeProperty(
+        string $propertyName,
+        ReflectionMethod $method,
+        ObjectMetadata $objectMetadata
+    ):PropertyMetadata
     {
         $propertyInfo = new PropertyMetadata();
         $setter       = $this->getSetterName($propertyName);
@@ -113,18 +118,14 @@ final class ModelAnalyzerDefault implements ModelAnalyzer
     {
         $result = preg_match('/@return ([\w].)/', $docBlock, $matches);
 
-        return ($result === 1)
-            ? $matches[1]
-            : 'mixed';
+        return ($result === 1) ? $matches[1] : 'mixed';
     }
 
     private function parseDomainTypeDocBlock($docBlock)
     {
         $result = preg_match('/@domain (.*)/', $docBlock, $matches);
 
-        return ($result === 1)
-            ? $matches[1]
-            : null;
+        return ($result === 1) ? $matches[1] : null;
     }
 
     private function getPropertyName(string $methodName)

@@ -12,6 +12,6 @@ namespace Veloci\Core\Configuration;
 class DatabaseTypes
 {
     const IN_MEMORY = 'in_memory';
-    const MONGODB = 'mongodb';
-    const MYSQL = 'mysql';
+    const MONGODB   = 'mongodb';
+    const MYSQL     = 'mysql';
 }

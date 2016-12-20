@@ -22,5 +22,7 @@ class MongoIdResultsetFilter implements ResultsetFilter
             $input['id'] = (string)$input['_id'];
             unset($input['_id']);
         }
+
+        return $input;
     }
 }

@@ -36,15 +36,14 @@ abstract class RichEntityModel implements EntityModel
 
     /**
      * @param ObjectMetadata $metadata
+     *
      * @return ObjectMetadata
      *
      * @throws \RuntimeException
      */
     public static function setCustomMetadata(ObjectMetadata $metadata)
     {
-        $metadata->getProperty('id')
-            ->setPrimaryKey(true)
-            ->setNullable(true);
+        $metadata->getProperty('id')->setPrimaryKey(true)->setNullable(true);
     }
 
     public function __wakeup()

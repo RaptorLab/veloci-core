@@ -33,6 +33,6 @@ class ClosureResultsetFilter implements ResultsetFilter
      */
     public function apply(array &$input)
     {
-        $this->closure->call($this, $input);
+        return $this->closure->call($this, $input);
     }
 }
