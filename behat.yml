@@ -1,6 +1,0 @@
-# behat.yml
-default:
-  suites:
-    user:
-      paths:    [ %paths.base%/features/user ]
-      contexts: [ UserContext ]

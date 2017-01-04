@@ -1,59 +1,54 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Created by PhpStorm.
+ * User: christian
+ * Date: 1/4/17
+ * Time: 2:17 AM
  */
 
 namespace Veloci\Core\Repository;
 
+
 use Doctrine\Common\Collections\Criteria;
-use Veloci\Core\Helper\Resultset\Resultset;
-use Veloci\Core\Model\EntityModel;
+use Traversable;
+use Veloci\Core\Entity;
+use Veloci\Core\EntityIndex;
 
 /**
+ * Interface EntityRepository
  *
- * @author christian
+ * @package Veloci\Core\Repository
  */
 interface EntityRepository
 {
-
     /**
+     * @param EntityIndex $id
      *
-     * @param mixed $id
-     * @return EntityModel|null
+     * @return Entity
      */
-    public function get($id);
-
-    /**
-     *
-     * @param EntityModel $model
-     */
-    public function save(EntityModel $model);
-
-    /**
-     *
-     * @param EntityModel $model
-     */
-    public function delete(EntityModel $model);
+    public function get (EntityIndex $id):?Entity;
 
     /**
      * @param Criteria $criteria
      *
-     * @return Resultset A collection of entities
+     * @return Traversable
      */
-    public function getAll(Criteria $criteria = null):Resultset;
+    public function getBy (Criteria $criteria):Traversable;
 
     /**
-     * @param EntityModel $model
-     * @return boolean
+     * @param Entity $entity
+     *
      */
-    public function exists(EntityModel $model):bool;
+    public function save (Entity $entity):void;
 
     /**
-     * @param EntityModel $model
-     * @return boolean
+     * @param Entity $entity
+     *
      */
-    public function accept(EntityModel $model):bool;
+    public function delete (Entity $entity):void;
+
+    /**
+     * @param Entity $entity
+     */
+    public function exists (Entity $entity):void;
 }
