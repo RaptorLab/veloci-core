@@ -9,24 +9,20 @@
 namespace Veloci\Core\Helper;
 
 
+use Veloci\Core\Model\DummyEntity;
 use DateTime;
-use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
 use Symfony\Component\Serializer\Serializer as SymfonySerializer;
 use Veloci\Core\Entity;
-use Veloci\Core\EntityIndex;
 use Veloci\Core\Helper\Serializer\EntityIndexNormalizer;
 use Veloci\Core\Helper\Serializer\EntitySerializer;
 use Veloci\Core\Helper\Serializer\EntitySerializerDefault;
-use Veloci\Core\Model\AbstractEntity;
 use Veloci\Core\Model\IntegerIndex;
 
 /**
@@ -64,7 +60,7 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
                                                   $accessExtractors
         );
 
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+//        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
 
         $propertyNormalizer = new PropertyNormalizer(null, null, $propertyInfo);
         //        $propertyNormalizer->setCallbacks([
@@ -204,6 +200,8 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param array $data
+     *
+     * @return Entity
      */
     public function createEntity(array $data):Entity
     {
@@ -215,59 +213,5 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
         $entity->setExternalIndex(new IntegerIndex($data['externalIndex']));
 
         return $entity;
-    }
-}
-
-/**
- * Class DummyEntity
- *
- * @package Veloci\Core\Helper
- */
-class DummyEntity extends AbstractEntity
-{
-
-    /**
-     * @var IntegerIndex
-     */
-    protected $externalIndex;
-
-    /**
-     * @param EntityIndex $id
-     */
-    public function setId(EntityIndex $id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @param DateTime $createdAt
-     */
-    public function setCreatedAt(DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * @param DateTime $updatedAt
-     */
-    public function setUpdatedAt(DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * @return EntityIndex
-     */
-    public function getExternalIndex(): EntityIndex
-    {
-        return $this->externalIndex;
-    }
-
-    /**
-     * @param IntegerIndex $externalIndex
-     */
-    public function setExternalIndex(IntegerIndex $externalIndex)
-    {
-        $this->externalIndex = $externalIndex;
     }
 }

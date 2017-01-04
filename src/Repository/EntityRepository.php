@@ -39,16 +39,18 @@ interface EntityRepository
      * @param Entity $entity
      *
      */
-    public function save (Entity $entity):void;
+    public function save (Entity $entity);
 
     /**
      * @param Entity $entity
      *
      */
-    public function delete (Entity $entity):void;
+    public function delete (Entity $entity);
 
     /**
      * @param Entity $entity
+     *
+     * @return bool
      */
-    public function exists (Entity $entity):void;
+    public function exists (Entity $entity):bool;
 }
