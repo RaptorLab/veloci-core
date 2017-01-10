@@ -9,7 +9,6 @@
 namespace Veloci\Core\Helper\Serializer;
 
 
-use Iterator;
 use Traversable;
 use Veloci\Core\Entity;
 
@@ -44,9 +43,10 @@ interface EntitySerializer
     public function arrayToCollection(array $data, string $class):Traversable;
 
     /**
-     * @param Entity []
+     * @param Entity[] $collection
      *
      * @return array
+     *
      */
     public function collectionToArray(Traversable $collection):array;
 }
