@@ -12,63 +12,103 @@ namespace Core\Repository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
+use PHPUnit_Framework_Assert as phpunit;
 use Traversable;
 use Veloci\Core\Entity;
 use Veloci\Core\EntityIndex;
 use Veloci\Core\Model\DummyEntity;
 use Veloci\Core\Model\IntegerIndex;
+use Veloci\Core\Repository\EntityRepository;
 use Veloci\Core\Repository\InMemoryEntityRepository;
 
 class InMemoryEntityRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     protected const DATE_TIME_FORMAT = 'Y-m-d H:i:s';
 
+    /**
+     * @var EntityRepository
+     */
+    private $repository;
+
+    public function setUp()
+    {
+        $this->repository = new InMemoryEntityRepository();
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeEmpty () {
+        $collection = $this->repository->getAll();
+
+        phpunit::assertEquals(0, $this->countTraversable($collection));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSaveAndGetOneTime()
+    {
+        $entity = $this->createEntity(['id' => 1, 'value' => 'test1']);
+
+        $this->repository->save($entity);
+
+        $collection = $this->repository->getAll();
+
+        phpunit::assertEquals(1, $this->countTraversable($collection));
+        phpunit::assertEquals($entity, $this->repository->get($entity->getId()));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetAll() {
+        $entity1 = $this->createEntity(['id' => 1, 'value' => 'test1']);
+        $entity2 = $this->createEntity(['id' => 2, 'value' => 'test2']);
+        $entity3 = $this->createEntity(['id' => 3, 'value' => 'test3']);
+
+        $this->repository->save($entity1);
+        $this->repository->save($entity2);
+        $this->repository->save($entity3);
+
+        $collection = $this->repository->getAll();
+
+        phpunit::assertEquals(3, $this->countTraversable($collection));
+    }
+
+
+
     public function testRepository()
     {
-        $repository = new InMemoryEntityRepository();
+        $entity1 = $this->createEntity(['id' => 1, 'value' => 'test1']);
+        $entity2 = $this->createEntity(['id' => 2, 'value' => 'test2']);
+        $entity3 = $this->createEntity(['id' => 3, 'value' => 'test3']);
 
-        $entity = $this->createEntity();
+        $this->repository->save($entity1);
+        $this->repository->save($entity2);
+        $this->repository->save($entity3);
 
-        $repository->save($entity);
+        phpunit::assertEquals($entity1, $this->repository->get($entity1->getId()));
+        phpunit::assertEquals($entity2, $this->repository->get($entity2->getId()));
+        phpunit::assertEquals($entity3, $this->repository->get($entity3->getId()));
 
-        \PHPUnit_Framework_Assert::assertEquals($entity, $repository->get($entity->getId()));
+        $this->repository->save($entity1);
 
-        $repository->save($entity);
+        $collection = $this->repository->getBy(Criteria::create());
 
-        //        $collection = $repository->getBy(new Criteria());
+        phpunit::assertEquals(3, $this->countTraversable($collection));
 
-        $criteria = Criteria::create()->where(Criteria::expr()->eq('id', 1));
+        //        $collection = $this->repository->getBy(new Criteria());
 
-        $collection = $repository->getBy($criteria);
+        $criteria = Criteria::create()->where(Criteria::expr()->eq('value', 'test1'));
 
-        \PHPUnit_Framework_Assert::assertEquals(1, $this->countTraversable($collection));
+        $collection = $this->repository->getBy($criteria);
 
-        $collection = $repository->getBy(Criteria::create()->where(Criteria::expr()->eq('id', new IntegerIndex(1))));
+        phpunit::assertEquals(1, $this->countTraversable($collection));
 
-        \PHPUnit_Framework_Assert::assertEquals(0, $this->countTraversable($collection));
-    }
+        $collection = $this->repository->getBy(Criteria::create()->where(Criteria::expr()->eq('id', new IntegerIndex(1))));
 
-
-    public function testCriteria()
-    {
-        $collection = new ArrayCollection([['id' => 1, 'value' => 10], ['id' => 2, 'value' => 20]]);
-
-        $criteria = Criteria::create()->where(Criteria::expr()->eq('id', 2));
-
-        $result = $collection->matching($criteria);
-
-        echo json_encode($result->toArray(), JSON_PRETTY_PRINT);
-    }
-
-    public function testCriteria2()
-    {
-        $collection = new ArrayCollection([new A(1, '10'), new A(2, '20')]);
-
-        $criteria = Criteria::create()->where(Criteria::expr()->eq('id',  new IntegerIndex(2)));
-
-        $result = $collection->matching($criteria);
-
-        var_dump($result->toArray());
+        phpunit::assertEquals(0, $this->countTraversable($collection));
     }
 
     /**
@@ -112,18 +152,23 @@ class InMemoryEntityRepositoryTest extends \PHPUnit_Framework_TestCase
             ? new IntegerIndex($data['externalIndex'])
             : new IntegerIndex(111);
 
+        $value = array_key_exists('value', $data)
+            ? $data['value']
+            : 'test';
+
         $entity->setId($id);
         $entity->setCreatedAt($createdAt);
         $entity->setUpdatedAt($updatedAt);
         $entity->setExternalIndex($externalIndex);
+        $entity->setValue($value);
 
         return $entity;
     }
 }
 
 
-
-class A {
+class A
+{
 
     /**
      * @var EntityIndex
@@ -141,9 +186,10 @@ class A {
      * @param int    $id
      * @param string $value
      */
-    public function __construct(int $id, string $value) {
+    public function __construct(int $id, string $value)
+    {
 
-        $this->id = new IntegerIndex($id);
+        $this->id    = new IntegerIndex($id);
         $this->value = $value;
     }
 

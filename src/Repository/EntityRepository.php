@@ -36,6 +36,11 @@ interface EntityRepository
     public function getBy (Criteria $criteria):Traversable;
 
     /**
+     * @return Traversable
+     */
+    public function getAll():Traversable;
+
+    /**
      * @param Entity $entity
      *
      */

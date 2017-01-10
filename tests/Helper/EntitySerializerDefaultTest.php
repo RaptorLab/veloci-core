@@ -60,7 +60,7 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
                                                   $accessExtractors
         );
 
-//        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+        //        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
 
         $propertyNormalizer = new PropertyNormalizer(null, null, $propertyInfo);
         //        $propertyNormalizer->setCallbacks([
@@ -87,7 +87,8 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
             'id'            => 1,
             'createdAt'     => '2017-01-04 23:13:59',
             'updatedAt'     => '2017-02-06 12:34:56',
-            'externalIndex' => 346
+            'externalIndex' => 346,
+            'value'         => 'test'
         ];
 
         $entity = $this->createEntity($expectedData);
@@ -156,19 +157,22 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
                 'id'            => 1,
                 'createdAt'     => '2017-01-04 23:13:59',
                 'updatedAt'     => '2017-02-06 12:34:56',
-                'externalIndex' => 111
+                'externalIndex' => 111,
+                'value'         => 'test1'
             ],
             [
                 'id'            => 2,
                 'createdAt'     => '2017-01-04 23:13:59',
                 'updatedAt'     => '2017-02-06 12:34:56',
-                'externalIndex' => 222
+                'externalIndex' => 222,
+                'value'         => 'test2'
             ],
             [
                 'id'            => 3,
                 'createdAt'     => '2017-01-04 23:13:59',
                 'updatedAt'     => '2017-02-06 12:34:56',
-                'externalIndex' => 333
+                'externalIndex' => 333,
+                'value'         => 'test3'
             ]
         ];
 
@@ -211,6 +215,7 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
         $entity->setCreatedAt(DateTime::createFromFormat(self::DATE_TIME_FORMAT, $data['createdAt']));
         $entity->setUpdatedAt(DateTime::createFromFormat(self::DATE_TIME_FORMAT, $data['updatedAt']));
         $entity->setExternalIndex(new IntegerIndex($data['externalIndex']));
+        $entity->setValue($data['value']);
 
         return $entity;
     }

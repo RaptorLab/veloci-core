@@ -48,6 +48,11 @@ class InMemoryEntityRepository implements EntityRepository
         return $this->collection->matching($criteria);
     }
 
+    public function getAll():Traversable
+    {
+        return $this->collection;
+    }
+
     /**
      * @param Entity $entity
      *

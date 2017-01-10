@@ -26,6 +26,11 @@ class DummyEntity extends AbstractEntity
     protected $externalIndex;
 
     /**
+     * @var mixed
+     */
+    protected $value;
+
+    /**
      * @param EntityIndex $id
      */
     public function setId(EntityIndex $id)
@@ -63,5 +68,21 @@ class DummyEntity extends AbstractEntity
     public function setExternalIndex(IntegerIndex $externalIndex)
     {
         $this->externalIndex = $externalIndex;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * @param mixed $value
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
     }
 }
