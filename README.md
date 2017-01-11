@@ -1,8 +1,22 @@
-# Veloci
+# Veloci Core
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/6d76f266-40d7-418b-a418-e86093953cd9/big.png)](https://insight.sensiolabs.com/projects/6d76f266-40d7-418b-a418-e86093953cd9)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/RaptorLab/veloci/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/RaptorLab/veloci/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/RaptorLab/veloci/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/RaptorLab/veloci/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/RaptorLab/veloci/badges/build.png?b=master)](https://scrutinizer-ci.com/g/RaptorLab/veloci/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/RaptorLab/veloci-core/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/RaptorLab/veloci-core/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/RaptorLab/veloci-core/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/RaptorLab/veloci-core/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/RaptorLab/veloci-core/badges/build.png?b=master)](https://scrutinizer-ci.com/g/RaptorLab/veloci-core/build-status/master)
 
-A framework designed for fast prototyping
+This library is part of Veloci, a framework designed for fast prototyping with a Domain Driven Design methodology.
+
+Actually, it does nothing, but it can be considered a proof of concept for a good design.
+
+Interesting points:
+ * It's written in PHP 7.1
+ * 100% test coverage
+ * Principle Design patterns used
+    * Design by contracts
+    * Domain Driven Design
+    * Test Driven Design
+    * SOLID
+ 
+Hope you'll enjoy
+
+Christian N.
