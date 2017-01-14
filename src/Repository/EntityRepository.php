@@ -10,7 +10,7 @@ namespace Veloci\Core\Repository;
 
 
 use Doctrine\Common\Collections\Criteria;
-use Traversable;
+use Iterator;
 use Veloci\Core\Entity;
 use Veloci\Core\EntityIndex;
 
@@ -31,14 +31,14 @@ interface EntityRepository
     /**
      * @param Criteria $criteria
      *
-     * @return Traversable
+     * @return Iterator
      */
-    public function getBy (Criteria $criteria):Traversable;
+    public function getBy (Criteria $criteria):Iterator;
 
     /**
-     * @return Traversable
+     * @return Iterator
      */
-    public function getAll():Traversable;
+    public function getAll():Iterator;
 
     /**
      * @param Entity $entity

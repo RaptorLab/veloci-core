@@ -11,7 +11,7 @@ namespace Veloci\Core\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
-use Traversable;
+use Iterator;
 use Veloci\Core\Entity;
 use Veloci\Core\EntityIndex;
 
@@ -41,16 +41,16 @@ class InMemoryEntityRepository implements EntityRepository
     /**
      * @param Criteria $criteria
      *
-     * @return Traversable
+     * @return Iterator
      */
-    public function getBy(Criteria $criteria):Traversable
+    public function getBy(Criteria $criteria):Iterator
     {
-        return $this->collection->matching($criteria);
+        return $this->collection->matching($criteria)->getIterator();
     }
 
-    public function getAll():Traversable
+    public function getAll():Iterator
     {
-        return $this->collection;
+        return $this->collection->getIterator();
     }
 
     /**

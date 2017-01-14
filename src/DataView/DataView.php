@@ -9,7 +9,7 @@
 namespace DataView;
 
 
-use Traversable;
+use Iterator;
 use Veloci\Core\Entity;
 use Veloci\Core\Helper\Pagination;
 
@@ -25,7 +25,7 @@ interface DataView
     /**
      * @param Pagination $pagination
      *
-     * @return Traversable
+     * @return Iterator
      */
-    public function getAll(Pagination $pagination):Traversable;
+    public function getAll(Pagination $pagination):Iterator;
 }
