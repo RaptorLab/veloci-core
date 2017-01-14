@@ -2,13 +2,13 @@
 /**
  * Created by PhpStorm.
  * User: christian
- * Date: 1/4/17
- * Time: 11:26 AM
+ * Date: 1/14/17
+ * Time: 10:35 AM
  */
-
 namespace Veloci\Core\Model;
 
 use DateTime;
+use Veloci\Core\Entity;
 use Veloci\Core\EntityIndex;
 
 
@@ -17,72 +17,30 @@ use Veloci\Core\EntityIndex;
  *
  * @package Veloci\Core\Helper
  */
-class DummyEntity extends AbstractEntity
+interface DummyEntity extends Entity
 {
+    /**
+     * @return EntityIndex
+     */
+    public function getId() : EntityIndex;
 
     /**
-     * @var IntegerIndex
+     * @return DateTime
      */
-    protected $externalIndex;
+    public function getCreatedAt() : DateTime;
 
     /**
-     * @var mixed
+     * @return DateTime
      */
-    protected $value;
-
-    /**
-     * @param EntityIndex $id
-     */
-    public function setId(EntityIndex $id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @param DateTime $createdAt
-     */
-    public function setCreatedAt(DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * @param DateTime $updatedAt
-     */
-    public function setUpdatedAt(DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
+    public function getUpdatedAt() : DateTime;
 
     /**
      * @return EntityIndex
      */
-    public function getExternalIndex(): EntityIndex
-    {
-        return $this->externalIndex;
-    }
-
-    /**
-     * @param IntegerIndex $externalIndex
-     */
-    public function setExternalIndex(IntegerIndex $externalIndex)
-    {
-        $this->externalIndex = $externalIndex;
-    }
+    public function getExternalIndex() : EntityIndex;
 
     /**
      * @return mixed
      */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * @param mixed $value
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-    }
+    public function getValue();
 }

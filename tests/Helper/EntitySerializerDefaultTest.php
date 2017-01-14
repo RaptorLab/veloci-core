@@ -9,7 +9,7 @@
 namespace Veloci\Core\Helper;
 
 
-use Veloci\Core\Model\DummyEntity;
+use Veloci\Core\Model\DummyEntityDefault;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
@@ -107,8 +107,8 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
             'externalIndex' => 346
         ];
 
-        /** @var DummyEntity $entity */
-        $entity = $this->serializer->arrayToEntity($data, DummyEntity::class);
+        /** @var DummyEntityDefault $entity */
+        $entity = $this->serializer->arrayToEntity($data, DummyEntityDefault::class);
 
         $this->checkEntity($data, $entity);
     }
@@ -136,7 +136,7 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        $collection = $this->serializer->arrayToCollection($data, DummyEntity::class);
+        $collection = $this->serializer->arrayToCollection($data, DummyEntityDefault::class);
 
         $i = 0;
 
@@ -188,10 +188,10 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param array       $data
-     * @param DummyEntity $entity
+     * @param array              $data
+     * @param DummyEntityDefault $entity
      */
-    public function checkEntity(array $data, DummyEntity $entity)
+    public function checkEntity(array $data, DummyEntityDefault $entity)
     {
         $createdAt = DateTime::createFromFormat(self::DATE_TIME_FORMAT, $data['createdAt']);
         $updatedAt = DateTime::createFromFormat(self::DATE_TIME_FORMAT, $data['updatedAt']);
@@ -209,7 +209,7 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
      */
     public function createEntity(array $data):Entity
     {
-        $entity = new DummyEntity();
+        $entity = new DummyEntityDefault();
 
         $entity->setId(new IntegerIndex($data['id']));
         $entity->setCreatedAt(DateTime::createFromFormat(self::DATE_TIME_FORMAT, $data['createdAt']));

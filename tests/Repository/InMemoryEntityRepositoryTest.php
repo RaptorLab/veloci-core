@@ -15,7 +15,7 @@ use PHPUnit_Framework_Assert as phpunit;
 use Traversable;
 use Veloci\Core\Entity;
 use Veloci\Core\EntityIndex;
-use Veloci\Core\Model\DummyEntity;
+use Veloci\Core\Model\DummyEntityDefault;
 use Veloci\Core\Model\IntegerIndex;
 use Veloci\Core\Repository\EntityRepository;
 use Veloci\Core\Repository\InMemoryEntityRepository;
@@ -170,7 +170,7 @@ class InMemoryEntityRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     public function createEntity(array $data = []):Entity
     {
-        $entity = new DummyEntity();
+        $entity = new DummyEntityDefault();
 
         $id = array_key_exists('id', $data)
             ? new IntegerIndex($data['id'])

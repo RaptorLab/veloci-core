@@ -68,7 +68,7 @@ class EntityIndexNormalizer extends AbstractNormalizer
      * @param string $format  format the normalization result will be encoded as
      * @param array  $context Context options for the normalizer
      *
-     * @return array|scalar
+     * @return array|string
      */
     public function normalize($object, $format = null, array $context = [])
     {
