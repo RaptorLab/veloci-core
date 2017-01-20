@@ -9,8 +9,8 @@
 namespace Veloci\Core\Helper\Serializer;
 
 
-use Traversable;
-use Veloci\Core\Entity;
+use Veloci\Core\Contract\POJO;
+use Iterator;
 
 /**
  * Class EntitySerializator
@@ -23,30 +23,30 @@ interface EntitySerializer
      * @param array  $data
      * @param string $class
      *
-     * @return Entity
+     * @return POJO
      */
-    public function arrayToEntity(array $data, string $class):Entity;
+    public function arrayToObject(array $data, string $class):POJO;
 
     /**
-     * @param Entity $entity
+     * @param POJO $entity
      *
      * @return array
      */
-    public function entityToArray(Entity $entity):array;
+    public function objectToArray(POJO $entity):array;
 
     /**
      * @param array  $data
      * @param string $class
      *
-     * @return Traversable
+     * @return Iterator
      */
-    public function arrayToCollection(array $data, string $class):Traversable;
+    public function arrayToCollection(array $data, string $class):Iterator;
 
     /**
-     * @param Entity[] $collection
+     * @param Iterator $collection
      *
      * @return array
      *
      */
-    public function collectionToArray(Traversable $collection):array;
+    public function collectionToArray(Iterator $collection):array;
 }

@@ -38,7 +38,7 @@ class ContainerAwareEntityFactory implements EntityFactory
 
         if ($implementationClass) {
             /** @var Entity $instance */
-            $instance = $this->entitySerializer->arrayToEntity($data, $implementationClass);
+            $instance = $this->entitySerializer->arrayToObject($data, $implementationClass);
 
             return $instance;
         }

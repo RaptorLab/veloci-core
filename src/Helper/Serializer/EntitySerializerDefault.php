@@ -9,10 +9,10 @@
 namespace Veloci\Core\Helper\Serializer;
 
 
+use Veloci\Core\Contract\POJO;
 use Doctrine\Common\Collections\ArrayCollection;
+use Iterator;
 use Symfony\Component\Serializer\Serializer;
-use Traversable;
-use Veloci\Core\Entity;
 
 /**
  * Class EntitySerializerDefault
@@ -41,19 +41,19 @@ class EntitySerializerDefault  implements EntitySerializer
      * @param array  $data
      * @param string $class
      *
-     * @return Entity
+     * @return POJO
      */
-    public function arrayToEntity(array $data, string $class):Entity
+    public function arrayToObject(array $data, string $class):POJO
     {
         return $this->serializer->denormalize($data, $class);
     }
 
     /**
-     * @param Entity $entity
+     * @param POJO $entity
      *
      * @return array
      */
-    public function entityToArray(Entity $entity):array
+    public function objectToArray(POJO $entity):array
     {
         return $this->serializer->normalize($entity, 'json');
     }
@@ -62,30 +62,30 @@ class EntitySerializerDefault  implements EntitySerializer
      * @param array  $data
      * @param string $class
      *
-     * @return Traversable
+     * @return Iterator
      */
-    public function arrayToCollection(array $data, string $class):Traversable
+    public function arrayToCollection(array $data, string $class):Iterator
     {
         $result = new ArrayCollection();
 
         foreach ($data as $item) {
-            $result->add($this->arrayToEntity($item, $class));
+            $result->add($this->arrayToObject($item, $class));
         }
 
-        return $result;
+        return $result->getIterator();
     }
 
     /**
-     * @param Entity [] $collection
+     * @param Iterator $collection
      *
      * @return array
      */
-    public function collectionToArray(Traversable $collection):array
+    public function collectionToArray(Iterator $collection):array
     {
         $result = [];
 
         foreach($collection as $entity) {
-            $result[] = $this->entityToArray($entity);
+            $result[] = $this->objectToArray($entity);
         }
 
         return $result;

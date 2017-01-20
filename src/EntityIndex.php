@@ -8,13 +8,15 @@
 
 namespace Veloci\Core;
 
+use Veloci\Core\Contract\POJO;
+
 
 /**
  * Interface EntityIndex
  *
  * @package Veloci\Core
  */
-interface EntityIndex
+interface EntityIndex extends POJO
 {
     /**
      * @return mixed

@@ -93,7 +93,7 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
 
         $entity = $this->createEntity($expectedData);
 
-        $data = $this->serializer->entityToArray($entity);
+        $data = $this->serializer->objectToArray($entity);
 
         \PHPUnit_Framework_Assert::assertEquals($expectedData, $data);
     }
@@ -108,7 +108,7 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
         ];
 
         /** @var DummyEntityDefault $entity */
-        $entity = $this->serializer->arrayToEntity($data, DummyEntityDefault::class);
+        $entity = $this->serializer->arrayToObject($data, DummyEntityDefault::class);
 
         $this->checkEntity($data, $entity);
     }
@@ -182,7 +182,7 @@ class EntitySerializerDefaultTest extends \PHPUnit_Framework_TestCase
             $collection->add($this->createEntity($item));
         }
 
-        $data = $this->serializer->collectionToArray($collection);
+        $data = $this->serializer->collectionToArray($collection->getIterator());
 
         \PHPUnit_Framework_Assert::assertEquals($expectedData, $data);
     }

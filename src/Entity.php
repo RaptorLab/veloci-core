@@ -9,6 +9,7 @@
 namespace Veloci\Core;
 
 
+use Veloci\Core\Contract\POJO;
 use DateTime;
 
 /**
@@ -16,7 +17,7 @@ use DateTime;
  *
  * @package Veloci\Core
  */
-interface Entity
+interface Entity extends POJO
 {
     /**
      * @return EntityIndex

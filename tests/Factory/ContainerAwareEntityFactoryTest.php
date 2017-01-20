@@ -38,7 +38,7 @@ class ContainerAwareEntityFactoryTest extends \PHPUnit_Framework_TestCase
         $dummyEntity = $this->mockEntity();
         $serializer = $this->mockSerialier();
 
-        $serializer->shouldReceive('arrayToEntity')->with($data, DummyEntityDefault::class)->andReturn($dummyEntity);
+        $serializer->shouldReceive('arrayToObject')->with($data, DummyEntityDefault::class)->andReturn($dummyEntity);
 
         $factory = new ContainerAwareEntityFactory($container, $serializer);
 
@@ -66,7 +66,7 @@ class ContainerAwareEntityFactoryTest extends \PHPUnit_Framework_TestCase
         $dummyEntity = $this->mockEntity();
         $serializer = $this->mockSerialier();
 
-        $serializer->shouldReceive('arrayToEntity')->with($data, DummyEntityDefault::class)->andReturn($dummyEntity);
+        $serializer->shouldReceive('arrayToObject')->with($data, DummyEntityDefault::class)->andReturn($dummyEntity);
 
         $factory = new ContainerAwareEntityFactory($container, $serializer);
 
