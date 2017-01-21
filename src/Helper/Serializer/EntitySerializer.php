@@ -13,7 +13,7 @@ use Veloci\Core\Contract\POJO;
 use Iterator;
 
 /**
- * Class EntitySerializator
+ * Class EntitySerializer
  *
  * @package Veloci\Core\Helper
  */

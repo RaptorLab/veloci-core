@@ -13,6 +13,11 @@ use Iterator;
 use Veloci\Core\Entity;
 use Veloci\Core\Helper\Pagination;
 
+/**
+ * Interface DataView
+ *
+ * @package DataView
+ */
 interface DataView
 {
     /**

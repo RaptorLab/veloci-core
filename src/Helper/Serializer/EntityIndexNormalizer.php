@@ -31,12 +31,12 @@ class EntityIndexNormalizer extends AbstractNormalizer
     }
 
     /**
-     * Denormalizes data back into an object of the given class.
+     * De-normalize data back into an object of the given class.
      *
      * @param mixed  $data    data to restore
      * @param string $class   the expected class to instantiate
      * @param string $format  format the given data was extracted from
-     * @param array  $context options available to the denormalizer
+     * @param array  $context options available to the de-normalizer
      *
      * @return object
      */
@@ -48,11 +48,11 @@ class EntityIndexNormalizer extends AbstractNormalizer
     }
 
     /**
-     * Checks whether the given class is supported for denormalization by this normalizer.
+     * Checks whether the given class is supported for de-normalization by this normalizer.
      *
      * @param mixed  $data   Data to denormalize from
-     * @param string $type   The class to which the data should be denormalized
-     * @param string $format The format being deserialized from
+     * @param string $type   The class to which the data should be de-normalized
+     * @param string $format The format being de-serialized from
      *
      * @return bool
      */

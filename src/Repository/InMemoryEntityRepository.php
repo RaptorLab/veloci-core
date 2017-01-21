@@ -15,6 +15,11 @@ use Iterator;
 use Veloci\Core\Entity;
 use Veloci\Core\EntityIndex;
 
+/**
+ * Class InMemoryEntityRepository
+ *
+ * @package Veloci\Core\Repository
+ */
 class InMemoryEntityRepository implements EntityRepository
 {
 
@@ -23,6 +28,9 @@ class InMemoryEntityRepository implements EntityRepository
      */
     private $collection;
 
+    /**
+     * InMemoryEntityRepository constructor.
+     */
     public function __construct()
     {
         $this->collection = new ArrayCollection();
@@ -48,6 +56,9 @@ class InMemoryEntityRepository implements EntityRepository
         return $this->collection->matching($criteria)->getIterator();
     }
 
+    /**
+     * @return Iterator
+     */
     public function getAll():Iterator
     {
         return $this->collection->getIterator();

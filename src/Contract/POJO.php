@@ -9,6 +9,11 @@
 namespace Veloci\Core\Contract;
 
 
+/**
+ * Interface POJO
+ *
+ * @package Veloci\Core\Contract
+ */
 interface POJO
 {
 

@@ -10,11 +10,25 @@ namespace Veloci\Core\Helper;
 
 use DateTime;
 
+/**
+ * Interface Pagination
+ *
+ * @package Veloci\Core\Helper
+ */
 interface Pagination
 {
+    /**
+     * @return int
+     */
     public function getPage():int;
 
+    /**
+     * @return int
+     */
     public function getCount():int;
 
+    /**
+     * @return DateTime
+     */
     public function getFromDate():DateTime;
 }
